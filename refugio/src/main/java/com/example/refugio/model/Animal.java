@@ -11,10 +11,7 @@ import jakarta.persistence.TemporalType;
 
 
 import java.io.Serializable;
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
 @Table(name= "animales")
 
@@ -36,9 +33,79 @@ public class Animal implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
 
+
+    public Animal() {
+    }
+
+    public Animal(String nombre, String especie, String raza, int edad, boolean vacunado, Date fechaIngreso) {
+        this.nombre = nombre;
+        this.especie = especie;
+        this.raza = raza;
+        this.edad = edad;
+        this.vacunado = vacunado;
+        this.fechaIngreso = fechaIngreso;
+    }
+
+
     public Animal(String raza, String especie, String nombre) {
         this.raza = raza;
         this.especie = especie;
         this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public boolean isVacunado() {
+        return vacunado;
+    }
+
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setVacunado(boolean vacunado) {
+        this.vacunado = vacunado;
+    }
+
+    public void setFechaIngreso(Date fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
     }
 }

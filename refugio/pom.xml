@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>hotelapi</artifactId>
+	<artifactId>refugio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hotelapi</name>
-	<description>Api para la gestion de un hotel</description>
+	<name>refugio</name>
+	<description>API para la gestión de un refugio de animales usando Spring Boot e Hibernate</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -53,6 +53,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.4.4</version>
 		</dependency>
 	</dependencies>
 
