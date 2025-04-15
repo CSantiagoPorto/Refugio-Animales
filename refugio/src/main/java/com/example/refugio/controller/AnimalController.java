@@ -2,12 +2,14 @@ package com.example.refugio.controller;
 
 
 import com.example.refugio.model.Animal;
+import com.example.refugio.repository.AnimalRepository;
 import com.example.refugio.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/animales")
@@ -33,21 +35,32 @@ public class AnimalController {
  }
 
  @GetMapping("/{id}") //Buscamos por el id correspondiente
-    public ResponseEntity<Animal>obtenerAnimalId(@PathVariable int id){
+    public ResponseEntity<Animal> obtenerAnimalId(@PathVariable int id){
 
-     //AQUÍ HAY QUE TENER EN CUENTA QUE PUEDE DEVOLVER EL ANIMAL O UN NULO
-     //QUÉ HACER SI DEVUELVE NULO?
-     //HAY QUE TENERLO EN CUENTA
+     return animalService.buscarAnimalId(id)
+             .map(animal -> ResponseEntity.ok(animal))
+             .orElseGet(()->ResponseEntity.notFound().build());
+//BuscarAnimalId es un Optional y por tanto tenemos el método map()
+     //Le estamos diciendo que si hay un valor del animal emita una respuesta de ok y devuelva el animal
+     //Si no existe, que devuelva un 404
      
-     return null;//PROVISIONAL
+
  }
 
  @PutMapping("/{id}")
     public ResponseEntity<Animal>actualizarAnimal(@PathVariable int id, @RequestBody Animal animal) {
-
-
      return ResponseEntity.ok(animalService.actualizarAnimal(animal));
  }
+ @DeleteMapping("/{id}")
+        public ResponseEntity<Void>borrarAnimal(@PathVariable int id){
+        animalService.buscarAnimalId(id)
+                .orElseThrow(()-> new RuntimeException("Animal no encontrado"));
+        animalService.borrarAnimal(id);
+        return ResponseEntity.noContent().build();
+        //build es necesario porque construye la respuesta y la devuelve . Sin él noContent no funciona
 
+
+
+ }
 
 }

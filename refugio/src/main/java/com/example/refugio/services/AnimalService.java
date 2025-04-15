@@ -13,4 +13,5 @@ public interface AnimalService {
     Optional<Animal> buscarAnimalId(int id);
     Animal añadirAnimal(Animal animal);//Aquí solo se añade el método no se implementa
     Animal actualizarAnimal(Animal animal);
+    void borrarAnimal(int id);
 }

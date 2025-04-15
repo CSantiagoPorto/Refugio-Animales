@@ -51,5 +51,11 @@ public class AnimalServiceImp implements AnimalService {
         return animalRepository.save(existe);
     }
 
+    @Override
+    public void borrarAnimal(int id) {
+      animalRepository.deleteById(id); 
+
+    }
+
 
 }
