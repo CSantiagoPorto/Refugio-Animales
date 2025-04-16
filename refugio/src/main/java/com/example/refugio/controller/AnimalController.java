@@ -5,8 +5,10 @@ import com.example.refugio.model.Animal;
 import com.example.refugio.repository.AnimalRepository;
 import com.example.refugio.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,8 +56,11 @@ public class AnimalController {
  @DeleteMapping("/{id}")
         public ResponseEntity<Void>borrarAnimal(@PathVariable int id){
         animalService.buscarAnimalId(id)
-                .orElseThrow(()-> new RuntimeException("Animal no encontrado"));
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Animal no encontrado"));
+        //esta excepción genera un código de estado y un mensaje y me ahorro el .isPresent()
+        //En este caso va a devolver un 404
         animalService.borrarAnimal(id);
+
         return ResponseEntity.noContent().build();
         //build es necesario porque construye la respuesta y la devuelve . Sin él noContent no funciona
 

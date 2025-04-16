@@ -53,7 +53,7 @@ public class AnimalServiceImp implements AnimalService {
 
     @Override
     public void borrarAnimal(int id) {
-      animalRepository.deleteById(id); 
+      animalRepository.deleteById(id);
 
     }
 

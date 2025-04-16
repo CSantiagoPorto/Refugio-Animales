@@ -32,6 +32,10 @@ public class Animal implements Serializable {
     @Column(name="fecha_ingreso")
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
+    @ManyToOne
+    @JoinColumn(name="cuidador_id")
+    private Cuidador cuidador;
+
 
 
     public Animal() {
