@@ -24,6 +24,7 @@ public class AnimalController {
  //ResponseEntity es un tipo de dato que se usa para envolver una entidad concreta como respuesta a una petición HTTP
   //ResponseEntity incluye el objeto, el código de estado HTTP (404) y las cabecera HTTP
  //@RequestBody toma el cuerpo de la petición y lo convierte en un objeto (va a devolver un animal no un JSON ni un campo)
+
     public ResponseEntity<Animal> añadirAnimal(@RequestBody Animal animal){
      //Llama al servicio animalService y guarda el objeto
      Animal nuevoAnimal= animalService.añadirAnimal(animal);

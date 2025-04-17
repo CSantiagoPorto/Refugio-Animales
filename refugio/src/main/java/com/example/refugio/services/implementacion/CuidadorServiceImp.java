@@ -17,9 +17,10 @@ import java.util.Optional;
 public class CuidadorServiceImp implements CuidadorService {
     @Autowired
     private CuidadorRepository cuidadorRepository;
+
     @Override
     public Optional<Cuidador> buscarCuidadorId(int id) {
-        return Optional.empty();
+        return cuidadorRepository.findById(id);
     }
 
     @Override
@@ -42,5 +43,20 @@ public class CuidadorServiceImp implements CuidadorService {
         Cuidador cuidador=cuidadorRepository.findById(id)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuidador no encontrado"));
         return cuidador.getAnimales();
+    }
+
+    @Override
+    public Cuidador actualizarCuidador(Cuidador cuidador) {
+        Cuidador existe= cuidadorRepository.findById(cuidador.getId())
+                .orElseThrow(()-> new RuntimeException("El cuidador que busca no existe"));
+        existe.setNombre(cuidador.getNombre());
+        existe.setEmail(cuidador.getEmail());
+        existe.setTelefono(cuidador.getTelefono());
+        return cuidadorRepository.save(existe);
+    }
+
+    @Override
+    public void borrarCuidador(int id) {
+        cuidadorRepository.deleteById(id);
     }
 }
