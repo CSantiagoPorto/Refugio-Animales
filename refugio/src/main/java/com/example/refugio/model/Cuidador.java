@@ -7,6 +7,7 @@ import java.util.List;
 
 
 @Entity //Marco la entidad
+@Table(name="cuidadores")
 public class Cuidador implements Serializable {
     @Id//Marco que va a ser la pk
     @GeneratedValue(strategy = GenerationType.IDENTITY)

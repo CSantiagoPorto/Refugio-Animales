@@ -20,12 +20,12 @@ public class CuidadorController {
 
 
 //Usamos @RequesBody porque vamos a recoger un objeto entero que se manda en el cuerpo
-    @PostMapping
-    public ResponseEntity<Cuidador>añadirCuidador(@RequestBody Cuidador cuidador){
-        Cuidador nuevoCuidador= cuidadorService.añadirCuidador(cuidador);
-        return ResponseEntity.ok(nuevoCuidador);
+@PostMapping
+public ResponseEntity<Cuidador> añadirCuidador(@RequestBody Cuidador cuidador) {
+    Cuidador nuevo = cuidadorService.añadirCuidador(cuidador);
+    return ResponseEntity.ok(nuevo);
+}
 
-    }
 
 
     @GetMapping
@@ -34,13 +34,13 @@ public class CuidadorController {
         return ResponseEntity.ok(cuidadorService.obternerTodosCuidadores());
     }
 
-    @GetMapping({"/id"})
+    @GetMapping("/{id}")
     public ResponseEntity<Cuidador>buscarCuidadorId(@PathVariable int id){
         return cuidadorService.buscarCuidadorId(id)
                 .map(cuidador -> ResponseEntity.ok(cuidador))
                 .orElseGet(()-> ResponseEntity.notFound().build());
     }
-    @GetMapping({"/api/cuidadores/{id}/animales"})
+    @GetMapping("/{id}/animales")
     public ResponseEntity<List<Animal>>obtenerAnimalesDeCuidador(@PathVariable int id){
         List<Animal>animal=cuidadorService.obtenerAnimalesDeCuidador(id);
         return ResponseEntity.ok(animal);
@@ -49,13 +49,13 @@ public class CuidadorController {
         //la clase Animal
     }
 
-    @PutMapping({"/id"})
-    public ResponseEntity<Cuidador>añadirCuidador(@PathVariable int id, @RequestBody Cuidador cuidador){
+    @PutMapping("/{id}")
+    public ResponseEntity<Cuidador>actualizarCuidador(@PathVariable int id, @RequestBody Cuidador cuidador){
         return ResponseEntity.ok(cuidadorService.añadirCuidador(cuidador));
         //Tengo el método en imp, así que aquí sólo llamo a la interfaz
     }
 
-    @DeleteMapping({"/id"})
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void>borrarCuidador(@PathVariable int id){
         cuidadorService.buscarCuidadorId(id)//Primero buscamos
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuidador no encontrado"));
