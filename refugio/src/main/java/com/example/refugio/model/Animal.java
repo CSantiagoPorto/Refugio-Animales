@@ -1,5 +1,6 @@
 package com.example.refugio.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,8 @@ import lombok.Setter;
 import java.util.Date;
 import jakarta.persistence.Table;
 import jakarta.persistence.TemporalType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 import java.io.Serializable;
@@ -34,6 +37,7 @@ public class Animal implements Serializable {
     private Date fechaIngreso;
     @ManyToOne
     @JoinColumn(name="cuidador_id")
+
     private Cuidador cuidador;
 
 
@@ -55,6 +59,14 @@ public class Animal implements Serializable {
         this.raza = raza;
         this.especie = especie;
         this.nombre = nombre;
+    }
+
+    public Cuidador getCuidador() {
+        return cuidador;
+    }
+
+    public void setCuidador(Cuidador cuidador) {
+        this.cuidador = cuidador;
     }
 
     public int getId() {

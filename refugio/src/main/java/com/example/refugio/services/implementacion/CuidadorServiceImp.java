@@ -2,6 +2,7 @@ package com.example.refugio.services.implementacion;
 
 import com.example.refugio.model.Animal;
 import com.example.refugio.model.Cuidador;
+import com.example.refugio.repository.AnimalRepository;
 import com.example.refugio.repository.CuidadorRepository;
 import com.example.refugio.services.CuidadorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ import java.util.Optional;
 public class CuidadorServiceImp implements CuidadorService {
     @Autowired
     private CuidadorRepository cuidadorRepository;
+
+    @Autowired
+    private AnimalRepository animalRepository;
+
 
 
     @Override
@@ -81,8 +86,22 @@ public class CuidadorServiceImp implements CuidadorService {
         return cuidadorRepository.save(existe);
     }
 
+
+
     @Override
     public void borrarCuidador(int id) {
+        Cuidador cuidador = cuidadorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuidador no encontrado"));
+
+        // Desasignamos el cuidador de los animales
+        if (cuidador.getAnimales() != null) {
+            for (Animal animal : cuidador.getAnimales()) {
+                animal.setCuidador(null);
+                animalRepository.save(animal);
+            }
+        }
+
         cuidadorRepository.deleteById(id);
     }
+
 }

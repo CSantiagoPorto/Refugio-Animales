@@ -1,5 +1,6 @@
 package com.example.refugio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Cuidador implements Serializable {
     private String email;
     private String telefono;
     @OneToMany(mappedBy = "cuidador")
+    @JsonIgnore
     private List<Animal> animales;
 
     public void setAnimales(List<Animal> animales) {

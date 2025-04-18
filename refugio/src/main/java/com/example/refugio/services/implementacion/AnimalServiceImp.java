@@ -1,6 +1,7 @@
 package com.example.refugio.services.implementacion;
 
 import com.example.refugio.model.Animal;
+import com.example.refugio.model.Cuidador;
 import com.example.refugio.repository.AnimalRepository;
 import com.example.refugio.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,9 @@ public class AnimalServiceImp implements AnimalService {
         existe.setEdad(animal.getEdad());
         existe.setVacunado(animal.isVacunado());
         existe.setFechaIngreso(animal.getFechaIngreso());
+        existe.setCuidador(animal.getCuidador());
+
+
         return animalRepository.save(existe);
     }
 

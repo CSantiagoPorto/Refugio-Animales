@@ -51,7 +51,7 @@ public ResponseEntity<Cuidador> añadirCuidador(@RequestBody Cuidador cuidador) 
 
     @PutMapping("/{id}")
     public ResponseEntity<Cuidador>actualizarCuidador(@PathVariable int id, @RequestBody Cuidador cuidador){
-        return ResponseEntity.ok(cuidadorService.añadirCuidador(cuidador));
+        return ResponseEntity.ok(cuidadorService.actualizarCuidador(cuidador) );
         //Tengo el método en imp, así que aquí sólo llamo a la interfaz
     }
 
