@@ -84,8 +84,20 @@ public class CuidadorServiceImp implements CuidadorService {
 
     @Override
     public void borrarCuidador(int id) {
-        cuidadorRepository.deleteById(id);
+        Cuidador cuidador = cuidadorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuidador no encontrado"));
+
+        // Eliminar la relación desde el lado del animal
+        List<Animal> animales = cuidador.getAnimales();
+        if (animales != null) {
+            for (Animal animal : animales) {
+                animal.setCuidador(null);
+            }
+        }
+
+        cuidadorRepository.delete(cuidador);
     }
+
     @Override
     public Cuidador loginCuidador(String email, String contrasena) {
         Cuidador cuidador = cuidadorRepository.findByEmail(email);
