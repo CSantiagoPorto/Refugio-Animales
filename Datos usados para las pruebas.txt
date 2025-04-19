@@ -1,0 +1,79 @@
+1. AÑADIR CUIDADOR (POST)
+Endpoint: POST /api/cuidadores
+JSON:
+{
+  "nombre": "Lola González",
+  "email": "lola.mendez@mail.com",
+  "telefono": "123456789",
+  "contrasena": "1235"
+}
+
+2. LOGIN CUIDADOR (POST)
+Endpoint: POST /api/cuidadores/login
+JSON:
+{
+  "email": "lola.mendez@mail.com",
+  "contrasena": "1235"
+}
+3. OBTENER TODOS LOS CUIDADORES (GET)
+Endpoint: GET /api/cuidadores
+
+4. OBTENER CUIDADOR POR ID (GET)
+Endpoint: GET /api/cuidadores/5
+
+5. EDITAR CUIDADOR (PUT)
+Endpoint: PUT /api/cuidadores/5
+JSON:
+{
+  "id": 5,
+  "nombre": "Lola G.",
+  "email": "lola.mendez@mail.com",
+  "telefono": "987654321",
+  "contrasena": "1236"
+}
+
+6. AÑADIR ANIMAL (POST)
+Endpoint: POST /api/animales
+JSON:
+{
+  "nombre": "Boby",
+  "especie": "Perro",
+  "raza": "Mestizo",
+  "edad": 4,
+  "vacunado": true,
+  "fechaIngreso": "2024-04-15",
+  "cuidador": {
+    "id": 5
+  }
+}
+
+7. OBTENER TODOS LOS ANIMALES (GET)
+Endpoint: GET /api/animales
+
+8. OBTENER ANIMAL POR ID (GET)
+Endpoint: GET /api/animales/3
+
+9. EDITAR ANIMAL (PUT)
+Endpoint: PUT /api/animales/3
+JSON:
+{
+  "id": 3,
+  "nombre": "Boby",
+  "especie": "Perro",
+  "raza": "Labrador",
+  "edad": 5,
+  "vacunado": true,
+  "fechaIngreso": "2024-04-15",
+  "cuidador": {
+    "id": 5
+  }
+}
+
+10. OBTENER ANIMALES DE UN CUIDADOR (GET)
+Endpoint: GET /api/cuidadores/5/animales
+
+11.: BORRAR ANIMAL (DELETE)
+Endpoint: DELETE /api/animales/3
+
+12.: BORRAR CUIDADOR (DELETE)
+Endpoint: DELETE /api/cuidadores/5

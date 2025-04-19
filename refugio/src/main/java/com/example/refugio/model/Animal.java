@@ -1,6 +1,7 @@
 package com.example.refugio.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,11 +33,13 @@ public class Animal implements Serializable {
     private int edad;
     @Column
     private  boolean vacunado;
-    @Column(name="fecha_ingreso")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "fecha_ingreso")
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
     @ManyToOne
-    @JoinColumn(name="cuidador_id")
+    @JoinColumn(name="cuidador_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
 
     private Cuidador cuidador;
 

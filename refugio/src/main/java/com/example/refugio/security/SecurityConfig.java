@@ -24,18 +24,14 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // .requestMatchers().permitAll()  // Permitir rutas específicas
-                        // .anyRequest().authenticated()  // Proteger el resto
-                        .requestMatchers("/api/animales/**").authenticated()  // requiere login
-                        .anyRequest().permitAll()  // Proteger el resto
+                        .requestMatchers("/api/**").permitAll()  // Permite todo temporalmente
+                        .anyRequest().permitAll()
                 )
                 .formLogin(form -> form.disable())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
-
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -50,11 +46,8 @@ public class SecurityConfig {
         return source;
     }
 
-
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

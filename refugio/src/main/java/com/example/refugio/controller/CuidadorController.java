@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -66,9 +67,12 @@ public ResponseEntity<Cuidador> añadirCuidador(@RequestBody Cuidador cuidador) 
 
     }
     @PostMapping("/login")
-    public ResponseEntity<Cuidador> loginCuidador(@RequestBody Cuidador datosLogin) {
-        Cuidador cuidador = cuidadorService.loginCuidador(datosLogin.getEmail(), datosLogin.getContrasena());
+    public ResponseEntity<Cuidador> login(@RequestBody Map<String, String> datosLogin) {
+        String email = datosLogin.get("email");
+        String contrasena = datosLogin.get("contrasena");
+        Cuidador cuidador = cuidadorService.loginCuidador(email, contrasena);
         return ResponseEntity.ok(cuidador);
     }
+
 
 }
