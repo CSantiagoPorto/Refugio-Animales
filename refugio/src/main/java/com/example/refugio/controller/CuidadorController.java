@@ -65,4 +65,10 @@ public ResponseEntity<Cuidador> añadirCuidador(@RequestBody Cuidador cuidador) 
         //build() es imprescindible para construir el ResponseEntity sin cuerpo
 
     }
+    @PostMapping("/login")
+    public ResponseEntity<Cuidador> loginCuidador(@RequestBody Cuidador datosLogin) {
+        Cuidador cuidador = cuidadorService.loginCuidador(datosLogin.getEmail(), datosLogin.getContrasena());
+        return ResponseEntity.ok(cuidador);
+    }
+
 }

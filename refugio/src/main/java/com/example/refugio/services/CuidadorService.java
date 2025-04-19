@@ -14,5 +14,7 @@ public interface CuidadorService {
     List<Animal>obtenerAnimalesDeCuidador(int id);//GET;
     Cuidador actualizarCuidador(Cuidador cuidador);
     void borrarCuidador(int id);
+    Cuidador loginCuidador(String email, String contrasena);
+
 
 }
